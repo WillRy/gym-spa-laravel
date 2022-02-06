@@ -4,6 +4,7 @@ import Login from "../views/publico/Login";
 import Painel from "../views/content/Painel";
 import Alunos from "../views/Alunos";
 import store from '../store/index'
+import Planos from "../views/Planos";
 
 const routes = [
   {
@@ -53,6 +54,11 @@ const routes = [
         path: "",
         name: "alunos",
         component: Alunos
+      },
+      {
+        path: "/planos",
+        name: "planos",
+        component: Planos
       }
     ]
   },

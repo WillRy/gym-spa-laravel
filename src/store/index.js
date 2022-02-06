@@ -2,17 +2,20 @@ import {createStore} from 'vuex'
 import api from "../services/api";
 import axios from "axios";
 import alunos from './alunos'
+import planos from './planos'
 
 export default createStore({
     state: {
         user: null,
-        ...alunos.state
+        ...alunos.state,
+        ...planos.state
     },
     mutations: {
         SET_USER(state, user) {
             state.user = user;
         },
-        ...alunos.mutations
+        ...alunos.mutations,
+        ...planos.mutations
     },
     actions: {
         login(context,{email, password}){
@@ -34,7 +37,8 @@ export default createStore({
                 return r;
             });
         },
-        ...alunos.actions
+        ...alunos.actions,
+        ...planos.actions
     },
     modules: {}
 })

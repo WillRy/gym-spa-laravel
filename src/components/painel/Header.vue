@@ -10,7 +10,7 @@
       <ul>
         <li>
           <router-link to="painel">alunos</router-link>
-          <router-link to="teste">planos</router-link>
+          <router-link to="planos">planos</router-link>
           <router-link to="teste">matrículas</router-link>
         </li>
       </ul>

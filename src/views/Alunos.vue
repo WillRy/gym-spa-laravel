@@ -26,6 +26,7 @@
           <tr>
             <th style="width: 420px">Nome</th>
             <th style="width: 320px">Email</th>
+            <th style="width: 320px">Plano</th>
             <th style="width: 130px">Ativo</th>
             <th style="width: 130px" class="text-align-right">Ações</th>
           </tr>
@@ -38,6 +39,26 @@
               </td>
               <td>
                 {{aluno.email}}
+              </td>
+              <td>
+                <template v-if="aluno.matricula && !aluno.matricula.deleted_at">
+                  <img
+                      src="../assets/icon-ativo.svg"
+                      class="active"
+                      alt=""
+                      v-if="!aluno.matricula.plano.deleted_at"
+                      title="Plano ativo"
+                  >
+                  <img
+                      src="../assets/icon-inativo.svg"
+                      class="inactive"
+                      alt=""
+                      v-else
+                      title="Plano inativo"
+                  >
+                </template>
+                {{aluno.matricula ? aluno.matricula.plano.nome : "-"}}
+
               </td>
               <td>
                 <img src="../assets/icon-ativo.svg" class="active" alt="" v-if="!aluno.deleted_at">
@@ -89,7 +110,13 @@ export default {
   name: "Alunos",
   components: {
     ModalExclusaoAluno,
-    ModalEditarAluno, ModalAddAluno, PaginacaoSemRouter, TabelaAlunos, BaseInput, PageAction},
+    ModalEditarAluno,
+    ModalAddAluno,
+    PaginacaoSemRouter,
+    TabelaAlunos,
+    BaseInput,
+    PageAction
+  },
   data() {
     return {
       loading: false,
@@ -180,5 +207,6 @@ export default {
 .active, .inactive {
   height: 20px;
   width: 20px;
+  margin-right: 10px;
 }
 </style>
