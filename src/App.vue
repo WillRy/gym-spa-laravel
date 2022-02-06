@@ -24,7 +24,7 @@ a {
 }
 
 :root {
-  --cor-principal: #EE4D64;
+  --cor-principal: #020540;
   --cor-secundaria: #CCCCCC;
   --cor-texto-principal: #444444;
   --cor-texto-secundario: #666666;

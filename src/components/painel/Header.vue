@@ -139,7 +139,7 @@ export default {
   font-weight: normal;
   font-size: 14px;
   text-align: right;
-  color: #DE3B3B;
+  color: var(--cor-principal);
 }
 
 .header-user .header-logout:hover {
