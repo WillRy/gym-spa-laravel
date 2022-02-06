@@ -1,19 +1,24 @@
-# spa
+# SPA (ainda em construção)
 
-## Project setup
-```
-npm install
-```
+Repositório contem exemplo de uma SPA feita em VUE.JS com vuex e vue-router,
+contendo exemplos de:
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- Autenticação JWT
+- Rotas protegidas e publicas
+- Controle de token expirado
+- Modal
+- Paginação
+- Pesquisa
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Como executar
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Configurar o backend
+
+O backend está no repositório:
+[https://github.com/WillRy/gym-api-laravel](https://github.com/WillRy/gym-api-laravel)
+
+### Prints
+
+![login](./prints/login.png)
+
+![login](./prints/alunos.png)

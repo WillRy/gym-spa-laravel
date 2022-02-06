@@ -136,6 +136,6 @@ export default {
   text-align: center;
   margin-bottom: 30px;
 
-  color: #EE4D64;
+  color: var(--cor-principal);
 }
 </style>
