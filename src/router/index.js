@@ -3,11 +3,26 @@ import Publico from "../views/content/Publico";
 import Login from "../views/publico/Login";
 import Painel from "../views/content/Painel";
 import Alunos from "../views/Alunos";
+import store from '../store/index'
 
 const routes = [
   {
     path: '/',
     component: Publico,
+    beforeEnter(to, from, next) {
+      let token = window.localStorage.getItem("token");
+      if(token) {
+        store.dispatch('getUser')
+            .then(() => {
+              next({name: 'alunos'});
+            })
+            .catch(() => {
+              next();
+            })
+      } else {
+        next();
+      }
+    },
     children: [
       {
         path: "",
@@ -19,6 +34,20 @@ const routes = [
   {
     path: '/painel',
     component: Painel,
+    beforeEnter(to, from, next) {
+      let token = window.localStorage.getItem("token");
+      if(token) {
+        store.dispatch('getUser')
+            .then(() => {
+              next();
+            })
+            .catch(() => {
+              next({name: 'login'});
+            })
+      } else {
+        next({name: 'login'});
+      }
+    },
     children: [
       {
         path: "",
@@ -26,6 +55,15 @@ const routes = [
         component: Alunos
       }
     ]
+  },
+  {
+    name: 'logout',
+    path: '/logout',
+    beforeEnter(to, from, next) {
+      store.dispatch('logout').then(() => {
+        next({name: 'login'})
+      })
+    },
   }
 ]
 
