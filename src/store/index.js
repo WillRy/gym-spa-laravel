@@ -1,15 +1,18 @@
 import {createStore} from 'vuex'
 import api from "../services/api";
 import axios from "axios";
+import alunos from './alunos'
 
 export default createStore({
     state: {
-        user: null
+        user: null,
+        ...alunos.state
     },
     mutations: {
         SET_USER(state, user) {
             state.user = user;
-        }
+        },
+        ...alunos.mutations
     },
     actions: {
         login(context,{email, password}){
@@ -30,7 +33,8 @@ export default createStore({
                 context.commit('SET_USER', r.data);
                 return r;
             });
-        }
+        },
+        ...alunos.actions
     },
     modules: {}
 })

@@ -1,7 +1,15 @@
 <template>
   <div class="form-group" :style="{'margin-bottom': mb, width: width}">
     <label v-if="label" :for="$attrs.id">{{label}}</label>
-    <input type="text" :value="modelValue" @input="updateValue" v-bind="attrs">
+    <DatePicker v-model="data" mode="date" is24hr v-bind="attrs">
+      <template v-slot="{ inputValue, inputEvents }">
+        <input
+            class="px-2 py-1 border rounded focus:outline-none focus:border-blue-300"
+            :value="inputValue"
+            v-on="inputEvents"
+        />
+      </template>
+    </DatePicker>
     <div class="errorMessage">
       <slot name="error"></slot>
     </div>
@@ -10,14 +18,14 @@
 
 <script>
 export default {
-  name: "BaseInput",
+  name: "BaseDate",
   inheritAttrs: false,
   props: {
     label: {
       type: String,
       default: ''
     },
-    modelValue: [String, Number],
+    modelValue: [String, Date],
     mb: {
       default: '20px'
     },
@@ -29,15 +37,22 @@ export default {
     attrs() {
       return {
         ...this.$attrs,
-        input: this.updateValue
       }
     }
   },
-  methods: {
-    updateValue(event) {
-      this.$emit('update:modelValue', event.target.value)
+  data(){
+    return {
+      data:  typeof this.modelValue === "string" ? new Date(`${this.modelValue}T00:00:00`) : this.modelValue
     }
   },
+  created() {
+    this.$emit('update:modelValue', this.data);
+  },
+  watch: {
+    data(valor){
+      this.$emit('update:modelValue', valor);
+    }
+  }
 }
 </script>
 <style scoped>
@@ -72,7 +87,7 @@ export default {
   color: var(--cor-texto-terciario);
 }
 
-.form-group input.error {
+.error input {
   border-color: red;
 }
 
