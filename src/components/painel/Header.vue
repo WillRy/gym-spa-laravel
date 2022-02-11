@@ -9,9 +9,9 @@
     <div id="menu">
       <ul>
         <li>
-          <router-link to="painel">alunos</router-link>
-          <router-link to="planos">planos</router-link>
-          <router-link to="matriculas">matrículas</router-link>
+          <router-link :to="{name:'alunos'}">alunos</router-link>
+          <router-link :to="{name:'planos'}">planos</router-link>
+          <router-link :to="{name:'matriculas'}">matrículas</router-link>
         </li>
       </ul>
       <div class="header-user">

@@ -57,12 +57,12 @@ const routes = [
         component: Alunos
       },
       {
-        path: "/planos",
+        path: "planos",
         name: "planos",
         component: Planos
       },
       {
-        path: "/matriculas",
+        path: "matriculas",
         name: "matriculas",
         component: Matriculas
       }
