@@ -17,7 +17,7 @@
       <div class="header-user">
         <span>{{user.name}}</span>
         <router-link to="logout" class="header-logout">
-          sair do sistema
+          <img src="../../assets/exit.svg" alt="">
         </router-link>
       </div>
     </div>
@@ -118,11 +118,23 @@ export default {
   color: var(--cor-link-hover);
 }
 
+.header-user {
+  display: flex;
+  align-items: center;
+}
+
+.header-user img {
+  height: 18px;
+  width: 18px;
+  display: block;
+}
+
 .header-user span {
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
   color: var(--cor-texto-secundario);
+  padding-right: 8px;
 }
 
 .header-user span {
@@ -144,5 +156,15 @@ export default {
 
 .header-user .header-logout:hover {
   opacity: 0.6;
+}
+
+@media all and (max-width: 600px) {
+  #logo {
+    display: none;
+  }
+
+  .header-user span {
+    display: none;
+  }
 }
 </style>

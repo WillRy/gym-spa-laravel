@@ -18,6 +18,7 @@ export default {
 <style>
 #page-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-bottom: 20px;
 }

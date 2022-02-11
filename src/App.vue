@@ -133,7 +133,7 @@ a {
 .container {
   margin: 0 auto;
   max-width: 1200px;
-  padding: 34px 0;
+  padding: 34px 20px;
 }
 
 .content {
