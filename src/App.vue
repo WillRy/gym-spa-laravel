@@ -40,7 +40,7 @@ a {
   --cor-secundaria: #CCCCCC;
   --cor-texto-principal: #444444;
   --cor-texto-secundario: #666666;
-  --cor-texto-terciario: #999999;
+  --cor-texto-terciario: #d9d9d9;
   --radius-principal: 4px;
   --cor-borda-principal: #DDDDDD;
   --cor-bg-secundaria: #F5F5F5;
@@ -228,6 +228,11 @@ a {
 
 .v-toast {
   z-index: 3000 !important;
+}
+
+input:disabled {
+  background-color: var(--cor-texto-terciario) !important;
+  cursor: not-allowed;
 }
 
 </style>

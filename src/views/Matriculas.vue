@@ -10,7 +10,7 @@
           Cadastrar
         </button>
         <BaseInput
-            placeholder="Buscar matricula por aluno ou plano"
+            placeholder="Pesquisa por aluno ou plano"
             mb="0px"
             width="237px"
             v-model="pesquisa"

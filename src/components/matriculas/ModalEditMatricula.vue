@@ -36,10 +36,11 @@
             :class="{error: v$.form.plano.$error}"
             track-by="id"
             text-by="nome"
-            :options="[]"
+            :options="planos"
             :internal-search="false"
             :limit="3"
-            :disabled="true"
+            @search-change="pesquisarPlanos"
+            :disabled="!possoEditarDatasEPlano"
         >
           <template v-slot:error>
             <div v-if="v$.form.plano.$error">
@@ -54,7 +55,7 @@
             placeholder="data"
             v-model="form.dt_inicio"
             :class="{error: v$.form.dt_inicio.$error}"
-            :disabled="!possoEditarDatas"
+            :disabled="!possoEditarDatasEPlano"
         >
           <template v-slot:error>
             <div v-if="v$.form.dt_inicio.$error">
@@ -103,6 +104,7 @@ export default {
   setup: () => ({v$: useVuelidate()}),
   data() {
     return {
+      planos: [],
       matricula: null,
       form: {
         aluno: null,
@@ -131,17 +133,14 @@ export default {
         let dt_inicio = this.form.dt_inicio;
         let planoDuracao = this.form.plano.duracao;
         let data = new Date(dt_inicio.valueOf());
-        data.setMonth(data.getMonth() + planoDuracao)
-        return new Date(data.valueOf());
+        return new Date(data.setMonth(data.getMonth() + planoDuracao));
       }
 
       return null
     },
-    possoEditarDatas() {
+    possoEditarDatasEPlano() {
       if (this.matricula) {
-        let dataInicio = new Date(this.matricula.dt_inicio);
-        let dataFim = new Date(this.matricula.dt_fim);
-        return !this.matricula.deleted_at && dataInicio > new Date();
+        return !this.matricula.desativado;
       }
       return false;
     }
@@ -151,7 +150,19 @@ export default {
     ...mapActions([
       "editMatricula",
       'returnMatricula',
+      'getMatriculaPlanos'
     ]),
+    async pesquisarPlanos(query) {
+      try {
+        let response = await this.getMatriculaPlanos({pesquisa: query});
+        this.planos = response.data.data;
+      } catch (e) {
+        this.$toast.open({
+          message: 'Não foi possível buscar os planos!',
+          type: 'error'
+        });
+      }
+    },
     async carregarFormulario() {
       try {
         this.loadingDados = true;
@@ -181,6 +192,7 @@ export default {
 
           let dados = {
             ...this.form,
+            plano_id: this.form.plano.id,
             dt_inicio: this.form.dt_inicio.toISOString().split('T')[0]
           }
 
@@ -190,6 +202,7 @@ export default {
           this.fecharModal();
         }
       } catch (e) {
+        console.log(e);
         this.$toast.open({
           message: 'Não foi possível editar a matrícula!',
           type: 'error'

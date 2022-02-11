@@ -33,7 +33,7 @@
 
     </div>
     <div class="matricula-card-act">
-      <button class="btn btn-primary" @click="abrirEdicao">
+      <button class="btn btn-primary" @click="abrirEdicao" :disabled="matricula.desativado">
         Editar
       </button>
       <button

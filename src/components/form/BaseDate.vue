@@ -1,6 +1,6 @@
 <template>
   <div class="form-group" :style="{'margin-bottom': mb, width: width}">
-    <label v-if="label" :for="$attrs.id">{{label}}</label>
+    <label v-if="label" :for="$attrs.id">{{ label }}</label>
     <DatePicker
         v-model="data"
         mode="date"
@@ -46,32 +46,39 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      data: typeof this.modelValue === "string" ? new Date(`${this.modelValue}T00:00:00`) : this.modelValue
+    }
+  },
   computed: {
     attrs() {
       return {
         ...this.$attrs,
       }
     },
+    dataNormalizada() {
+      return typeof this.modelValue === "string" ? new Date(`${this.modelValue}T00:00:00`) : this.modelValue;
+    },
     formatado() {
-      if(this.modelValue) {
+      if (this.modelValue) {
         let data = typeof this.modelValue === "string" ? new Date(`${this.modelValue}T00:00:00`) : this.modelValue
         return data.toLocaleDateString().split('T')[0];
       }
       return '';
     }
   },
-  data(){
-    return {
-      data:  typeof this.modelValue === "string" ? new Date(`${this.modelValue}T00:00:00`) : this.modelValue
-    }
+  methods: {
+    normalizarData() {
+      this.$emit('update:modelValue', this.dataNormalizada);
+    },
   },
   created() {
-    this.$emit('update:modelValue', this.modelValue);
+    this.normalizarData();
   },
   watch: {
-    modelValue(valor){
-      let data = typeof valor === "string" ? new Date(`${this.modelValue}T00:00:00`) : this.modelValue
-      this.$emit('update:modelValue', data);
+    dataNormalizada() {
+      this.normalizarData();
     }
   }
 }
