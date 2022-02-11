@@ -16,7 +16,7 @@
       </ul>
       <div class="header-user">
         <span>{{user.name}}</span>
-        <router-link to="logout" class="header-logout">
+        <router-link :to="{name:'logout'}" class="header-logout">
           <img src="../../assets/exit.svg" alt="">
         </router-link>
       </div>
