@@ -131,14 +131,14 @@ export default {
         let dt_inicio = this.form.dt_inicio;
         let planoDuracao = this.form.plano.duracao;
         let data = new Date(dt_inicio.valueOf());
-        data.setMonth(data.getMonth()+planoDuracao)
+        data.setMonth(data.getMonth() + planoDuracao)
         return new Date(data.valueOf());
       }
 
       return null
     },
     possoEditarDatas() {
-      if(this.matricula) {
+      if (this.matricula) {
         let dataInicio = new Date(this.matricula.dt_inicio);
         let dataFim = new Date(this.matricula.dt_fim);
         return !this.matricula.deleted_at && dataInicio > new Date();

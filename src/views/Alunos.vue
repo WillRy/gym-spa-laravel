@@ -21,7 +21,7 @@
 
     <div class="content" :class="{loading: loading}">
       <div class="table-responsive">
-        <table class="table" >
+        <table class="table">
           <thead>
           <tr>
             <th style="width: 420px">Nome</th>
@@ -33,48 +33,31 @@
           </thead>
           <tbody v-if="loading && alunos === null" style="height:500px;"></tbody>
           <tbody v-else-if="alunos && alunos.data.length > 0">
-            <tr v-for="aluno in alunos.data" :key="aluno.id">
-              <td>
-                {{aluno.nome}}
-              </td>
-              <td>
-                {{aluno.email}}
-              </td>
-              <td>
-                <template v-if="aluno.matricula && !aluno.matricula.deleted_at">
-                  <img
-                      src="../assets/icon-ativo.svg"
-                      class="active"
-                      alt=""
-                      v-if="!aluno.matricula.plano.deleted_at"
-                      title="Plano ativo"
-                  >
-                  <img
-                      src="../assets/icon-inativo.svg"
-                      class="inactive"
-                      alt=""
-                      v-else
-                      title="Plano inativo"
-                  >
-                </template>
-                {{aluno.matricula ? aluno.matricula.plano.nome : "-"}}
-
-              </td>
-              <td>
-                <img src="../assets/icon-ativo.svg" class="active" alt="" v-if="!aluno.deleted_at">
-                <img src="../assets/icon-inativo.svg" class="inactive" alt="" v-else>
-              </td>
-              <td>
-                <div class="btn-group justify-end">
-                  <button class="btn-text btn-text-action" @click="abrirEdicao(aluno.id)">
-                    editar
-                  </button>
-                  <button class="btn-text btn-text-danger" @click="abrirExclusao(aluno.id)">
-                    excluir
-                  </button>
-                </div>
-              </td>
-            </tr>
+          <tr v-for="aluno in alunos.data" :key="aluno.id">
+            <td>
+              {{ aluno.nome }}
+            </td>
+            <td>
+              {{ aluno.email }}
+            </td>
+            <td>
+              {{ aluno.matricula ? aluno.matricula.plano.nome : "-" }}
+            </td>
+            <td>
+              <img src="../assets/icon-ativo.svg" class="active" alt="" v-if="!aluno.deleted_at">
+              <img src="../assets/icon-inativo.svg" class="inactive" alt="" v-else>
+            </td>
+            <td>
+              <div class="btn-group justify-end">
+                <button class="btn-text btn-text-action" @click="abrirEdicao(aluno.id)">
+                  editar
+                </button>
+                <button class="btn-text btn-text-danger" @click="abrirExclusao(aluno.id)">
+                  excluir
+                </button>
+              </div>
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -99,7 +82,6 @@
 <script>
 import PageAction from "../components/painel/PageAction";
 import BaseInput from "../components/form/BaseInput";
-import TabelaAlunos from "../components/alunos/TabelaAlunos";
 import {mapActions, mapMutations, mapState} from "vuex";
 import PaginacaoSemRouter from "../components/paginacao/PaginacaoSemRouter";
 import ModalAddAluno from "../components/alunos/ModalAddAluno";
@@ -113,7 +95,6 @@ export default {
     ModalEditarAluno,
     ModalAddAluno,
     PaginacaoSemRouter,
-    TabelaAlunos,
     BaseInput,
     PageAction
   },
@@ -132,7 +113,7 @@ export default {
       set(valor) {
         this.SET_ALUNOS_PESQUISA(valor);
       },
-      get(){
+      get() {
         return this.$store.state.alunos_pesquisa;
       }
     },
@@ -140,7 +121,7 @@ export default {
       set(valor) {
         this.SET_ALUNOS_PAGINA(valor);
       },
-      get(){
+      get() {
         return this.$store.state.alunos_pagina;
       }
     }
@@ -152,21 +133,21 @@ export default {
   },
   methods: {
     ...mapMutations([
-        "SET_ALUNOS_PAGINA",
-        "SET_ALUNOS_PESQUISA",
-        "SET_ALUNOS_ID_EDICAO",
-        "SET_ALUNOS_ID_EXCLUSAO"
+      "SET_ALUNOS_PAGINA",
+      "SET_ALUNOS_PESQUISA",
+      "SET_ALUNOS_ID_EDICAO",
+      "SET_ALUNOS_ID_EXCLUSAO"
     ]),
     ...mapActions([
-        'getAlunos'
+      'getAlunos'
     ]),
-    abrirEdicao(id){
+    abrirEdicao(id) {
       this.SET_ALUNOS_ID_EDICAO(id);
     },
-    abrirExclusao(id){
+    abrirExclusao(id) {
       this.SET_ALUNOS_ID_EXCLUSAO(id);
     },
-    resetFiltros(){
+    resetFiltros() {
       this.SET_ALUNOS_PAGINA(1);
       this.SET_ALUNOS_PESQUISA('');
     },
@@ -174,7 +155,7 @@ export default {
       this.pagina = pagina;
       this.buscarAlunos();
     },
-    pesquisar(){
+    pesquisar() {
       this.SET_ALUNOS_PAGINA(1);
       this.buscarAlunos();
     },

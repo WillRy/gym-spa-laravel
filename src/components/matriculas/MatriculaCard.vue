@@ -171,7 +171,7 @@ export default {
   margin-right: 8px;
 }
 
-.matricula-card .active{
+.matricula-card .active {
   height: 14px;
   width: 14px;
   margin-right: 8px;

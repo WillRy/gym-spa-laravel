@@ -110,8 +110,8 @@ export default {
       }
     }
   },
-  computed:{
-    valorTotal(){
+  computed: {
+    valorTotal() {
       return (this.form.duracao * this.form.valor).toFixed(2);
     }
   },

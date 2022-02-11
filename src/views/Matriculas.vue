@@ -122,7 +122,7 @@ export default {
         this.pagina++;
       }
     },
-    resetFiltros(){
+    resetFiltros() {
       this.SET_MATRICULAS_PAGINA(1);
       this.SET_MATRICULAS_PESQUISA('');
     },
@@ -132,7 +132,7 @@ export default {
       this.buscarMatriculas();
     },
     reload(reload) {
-      if(reload.tipo === "created") {
+      if (reload.tipo === "created") {
         this.pagina = 1;
         this.buscarMatriculas();
       }

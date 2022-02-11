@@ -127,7 +127,7 @@ export default {
         let dt_inicio = this.form.dt_inicio;
         let planoDuracao = this.form.plano.duracao;
         let data = new Date(dt_inicio.valueOf());
-        return new Date(data.setMonth(data.getMonth()+planoDuracao));
+        return new Date(data.setMonth(data.getMonth() + planoDuracao));
       }
 
       return null
@@ -199,7 +199,7 @@ export default {
           this.fecharModal();
         }
       } catch (e) {
-        this.$laravelError(e,'Não foi possível gerar a matricula!')
+        this.$laravelError(e, 'Não foi possível gerar a matricula!')
 
       } finally {
         this.loading = false;

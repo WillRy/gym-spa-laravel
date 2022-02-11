@@ -8,7 +8,7 @@
       <h3>Excluir Aluno</h3>
     </template>
     <template #body>
-      <p v-if="aluno && !loadingDados">Deseja excluir o aluno {{aluno.nome}}?</p>
+      <p v-if="aluno && !loadingDados">Deseja excluir o aluno {{ aluno.nome }}?</p>
       <Loader height="80px" width="80px" v-if="loadingDados" fill="#020540"/>
     </template>
 

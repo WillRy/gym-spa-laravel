@@ -112,20 +112,35 @@ export default {
       }
     }
   },
-  computed:{
+  computed: {
     ...mapState({
       "id_plano": 'planos_id_edicao'
     }),
-    valorTotal(){
+    valorTotal() {
       return (this.form.duracao * this.form.valor).toFixed(2);
     }
   },
   methods: {
-    ...mapMutations(['SET_PLANOS_RELOAD','SET_PLANOS_ID_EDICAO']),
+    ...mapMutations(['SET_PLANOS_RELOAD', 'SET_PLANOS_ID_EDICAO']),
     ...mapActions([
       "editPlano",
-      'returnPlano'
+      'returnPlano',
+      'getMatriculaPlanos'
     ]),
+    async pesquisarPlanos(query) {
+      try {
+        this.loadingDados = true;
+        let response = await this.getMatriculaPlanos({pesquisa: query});
+        this.planos = response.data.data;
+      } catch (e) {
+        this.$toast.open({
+          message: 'Não foi possível buscar os planos!',
+          type: 'error'
+        });
+      } finally {
+        this.loadingDados = false;
+      }
+    },
     async carregarFormulario() {
       try {
         let dados = await this.returnPlano(this.id_plano);

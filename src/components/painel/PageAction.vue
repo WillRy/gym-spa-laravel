@@ -1,12 +1,12 @@
 <template>
-<div id="page-header">
-  <div class="page-header-titulo">
-    <slot></slot>
+  <div id="page-header">
+    <div class="page-header-titulo">
+      <slot></slot>
+    </div>
+    <div class="page-header-actions">
+      <slot name="actions"></slot>
+    </div>
   </div>
-  <div class="page-header-actions">
-    <slot name="actions"></slot>
-  </div>
-</div>
 </template>
 
 <script>
@@ -23,7 +23,7 @@ export default {
 }
 
 .page-header-titulo {
- flex: 1;
+  flex: 1;
 }
 
 .page-header-titulo .titulo {

@@ -107,9 +107,9 @@ export default {
         sexo: null
       },
       sexo: [
-        { name: 'Masculino', id: 'masculino' },
-        { name: 'Feminino', id: 'feminino' },
-        { name: 'Outro', id: 'outro' },
+        {name: 'Masculino', id: 'masculino'},
+        {name: 'Feminino', id: 'feminino'},
+        {name: 'Outro', id: 'outro'},
       ],
       loading: false
     }

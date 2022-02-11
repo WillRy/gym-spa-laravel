@@ -8,7 +8,7 @@
       <h3>Excluir Plano</h3>
     </template>
     <template #body>
-      <p v-if="plano && !loadingDados">Deseja excluir o plano {{plano.nome}}?</p>
+      <p v-if="plano && !loadingDados">Deseja excluir o plano {{ plano.nome }}?</p>
       <Loader height="80px" width="80px" v-if="loadingDados" fill="#020540"/>
     </template>
 
