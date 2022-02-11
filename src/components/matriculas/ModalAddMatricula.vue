@@ -11,7 +11,7 @@
       <form @submit.prevent="submit">
         <BaseSelect
             label="Aluno"
-            placeholder="Selecione o aluno"
+            placeholder="Pesquise o aluno"
             v-model="form.aluno"
             :class="{error: v$.form.aluno.$error}"
             track-by="id"
@@ -30,7 +30,7 @@
 
         <BaseSelect
             label="Plano"
-            placeholder="Selecione o plano"
+            placeholder="Pesquise o plano"
             v-model="form.plano"
             :class="{error: v$.form.plano.$error}"
             track-by="id"
