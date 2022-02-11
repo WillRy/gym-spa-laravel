@@ -61,6 +61,15 @@ let LaravelError = {
     }
 }
 
+vue.config.globalProperties.$filters = {
+    data(value) {
+        return value ? new Date(`${value}T00:00:00`).toLocaleDateString() : '';
+    },
+    dinheiro(valor) {
+        return (new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor));
+    }
+}
+
 vue.use(store)
     .use(router)
     .use(VueToast)

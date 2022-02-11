@@ -41,7 +41,7 @@
               {{plano.duracao}}
             </td>
             <td>
-              {{plano.valor}}
+              {{$filters.dinheiro(plano.valor)}}
             </td>
             <td>
               <img src="../assets/icon-ativo.svg" class="active" alt="" v-if="!plano.deleted_at">

@@ -23,12 +23,12 @@
 
       <div class="matricula-card-data">
         <img src="../../assets/calendar.svg" class="icon" style="height: 16px;width: 16px">
-        <span>{{ matricula.dt_inicio }}</span>
+        <span>{{ $filters.data(matricula.dt_inicio) }}</span>
       </div>
 
       <div class="matricula-card-data">
         <img src="../../assets/calendar.svg" class="icon" style="height: 16px;width: 16px">
-        <span>{{ matricula.dt_fim }}</span>
+        <span>{{ $filters.data(matricula.dt_fim) }}</span>
       </div>
 
     </div>
