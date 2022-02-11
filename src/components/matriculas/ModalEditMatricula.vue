@@ -50,7 +50,7 @@
 
 
         <BaseDate
-            label="Data de Nascimento"
+            label="Data de Início"
             placeholder="data"
             v-model="form.dt_inicio"
             :class="{error: v$.form.dt_inicio.$error}"

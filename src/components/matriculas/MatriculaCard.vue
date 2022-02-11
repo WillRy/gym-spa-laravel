@@ -18,7 +18,7 @@
 
       {{ matricula.aluno.nome }}
     </h3>
-    <h5>{{ matricula.plano.nome }}</h5>
+    <h5>Plano: {{ matricula.plano.nome }}</h5>
     <div class="matricula-card-datas">
 
       <div class="matricula-card-data">
