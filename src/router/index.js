@@ -5,6 +5,7 @@ import Painel from "../views/content/Painel";
 import Alunos from "../views/Alunos";
 import store from '../store/index'
 import Planos from "../views/Planos";
+import Matriculas from "../views/Matriculas";
 
 const routes = [
   {
@@ -59,6 +60,11 @@ const routes = [
         path: "/planos",
         name: "planos",
         component: Planos
+      },
+      {
+        path: "/matriculas",
+        name: "matriculas",
+        component: Matriculas
       }
     ]
   },

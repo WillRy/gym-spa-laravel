@@ -19,7 +19,6 @@ export default {
 #painel {
   background: var(--cor-bg-secundaria);
   padding-top: 64px;
-  height: 100vh;
 }
 
 

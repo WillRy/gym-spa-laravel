@@ -20,10 +20,51 @@ const vMaskV3 = {
     unmounted: vMaskV2.unbind
 };
 
+const laravelErrors = {
+    install(Vue, options) {
+        Vue.laravelError = (e, message) => {
+            let response = e.response;
+            if (response && response.status === 422 && response.data.errors) {
+                let erro = Object.keys(response.data.errors)[0];
+                this.$toast.open({
+                    message: response.data.errors[erro][0],
+                    type: 'error'
+                });
+            } else {
+                this.$toast.open({
+                    message: message,
+                    type: 'error'
+                });
+            }
+        }
+    },
+}
+
+let LaravelError = {
+    install: (app, options) => {
+        // inject a globally available $translate() method
+        app.config.globalProperties.$laravelError = (e, message) => {
+            let response = e.response;
+            if (response && response.status === 422 && response.data.errors) {
+                let erro = Object.keys(response.data.errors)[0];
+                app.config.globalProperties.$toast.open({
+                    message: response.data.errors[erro][0],
+                    type: 'error'
+                });
+            } else {
+                app.config.globalProperties.$toast.open({
+                    message: message,
+                    type: 'error'
+                });
+            }
+        }
+    }
+}
 
 vue.use(store)
     .use(router)
     .use(VueToast)
+    .use(LaravelError)
     .directive('mask', vMaskV3)
     .component('DatePicker', DatePicker);
 

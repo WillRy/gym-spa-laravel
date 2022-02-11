@@ -8,6 +8,18 @@ body,html, #app {
   height: 100vh;
 }
 
+html,body,#app {
+  height:100%;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+}
+#app > * {
+  flex: 1;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -81,6 +93,10 @@ a {
 }
 .btn-secondary {
   background-color: var(--cor-secundaria);
+  color: #fff;
+}
+.btn-danger {
+  background-color: #e06d6d;
   color: #fff;
 }
 
@@ -207,6 +223,11 @@ a {
   background-repeat: no-repeat;
   background-size: 50px 50px;
   content: "";
+}
+
+
+.v-toast {
+  z-index: 3000 !important;
 }
 
 </style>

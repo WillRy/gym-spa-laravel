@@ -3,19 +3,22 @@ import api from "../services/api";
 import axios from "axios";
 import alunos from './alunos'
 import planos from './planos'
+import matriculas from "./matriculas";
 
 export default createStore({
     state: {
         user: null,
         ...alunos.state,
-        ...planos.state
+        ...planos.state,
+        ...matriculas.state,
     },
     mutations: {
         SET_USER(state, user) {
             state.user = user;
         },
         ...alunos.mutations,
-        ...planos.mutations
+        ...planos.mutations,
+        ...matriculas.mutations,
     },
     actions: {
         login(context,{email, password}){
@@ -38,7 +41,8 @@ export default createStore({
             });
         },
         ...alunos.actions,
-        ...planos.actions
+        ...planos.actions,
+        ...matriculas.actions,
     },
     modules: {}
 })

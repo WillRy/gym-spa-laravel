@@ -1,12 +1,22 @@
 <template>
   <div class="form-group" :style="{'margin-bottom': mb, width: width}">
     <label v-if="label" :for="$attrs.id">{{label}}</label>
-    <DatePicker v-model="data" mode="date" is24hr v-bind="attrs">
+    <DatePicker
+        v-model="data"
+        mode="date"
+        is24hr
+        v-bind="attrs"
+    >
       <template v-slot="{ inputValue, inputEvents }">
         <input
-            class="px-2 py-1 border rounded focus:outline-none focus:border-blue-300"
             :value="inputValue"
             v-on="inputEvents"
+            v-if="!disabled"
+        />
+        <input
+            :value="formatado"
+            disabled
+            v-else
         />
       </template>
     </DatePicker>
@@ -31,6 +41,9 @@ export default {
     },
     width: {
       default: 'auto'
+    },
+    disabled: {
+      default: false
     }
   },
   computed: {
@@ -38,6 +51,13 @@ export default {
       return {
         ...this.$attrs,
       }
+    },
+    formatado() {
+      if(this.modelValue) {
+        let data = typeof this.modelValue === "string" ? new Date(`${this.modelValue}T00:00:00`) : this.modelValue
+        return data.toLocaleDateString().split('T')[0];
+      }
+      return '';
     }
   },
   data(){
@@ -46,11 +66,12 @@ export default {
     }
   },
   created() {
-    this.$emit('update:modelValue', this.data);
+    this.$emit('update:modelValue', this.modelValue);
   },
   watch: {
-    data(valor){
-      this.$emit('update:modelValue', valor);
+    modelValue(valor){
+      let data = typeof valor === "string" ? new Date(`${this.modelValue}T00:00:00`) : this.modelValue
+      this.$emit('update:modelValue', data);
     }
   }
 }
