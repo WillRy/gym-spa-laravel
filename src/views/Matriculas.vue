@@ -122,6 +122,10 @@ export default {
         this.pagina++;
       }
     },
+    resetFiltros(){
+      this.SET_MATRICULAS_PAGINA(1);
+      this.SET_MATRICULAS_PESQUISA('');
+    },
   },
   watch: {
     pagina() {
@@ -135,6 +139,7 @@ export default {
     }
   },
   created() {
+    this.resetFiltros();
     this.buscarMatriculas();
 
     window.addEventListener("scroll", this.aumentarPagina);
