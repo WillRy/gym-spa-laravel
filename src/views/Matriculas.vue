@@ -9,6 +9,16 @@
           <img src="../assets/add.svg" class="icon" style="height: 20px;width: 20px">
           Cadastrar
         </button>
+        <BaseSelect
+            placeholder="Selecione o filtro"
+            v-model="status"
+            track-by="id"
+            text-by="name"
+            :options="status_filtro"
+            mb="0px"
+            width="237px"
+            @change="pesquisar"
+        />
         <BaseInput
             placeholder="Pesquisa por aluno ou plano"
             mb="0px"
@@ -35,6 +45,7 @@
 import {mapActions, mapMutations, mapState} from "vuex";
 import PageAction from '../components/painel/PageAction'
 import BaseInput from '../components/form/BaseInput'
+import BaseSelect from '../components/form/BaseSelect'
 import Loader from "../components/Loader";
 import MatriculaCard from "../components/matriculas/MatriculaCard";
 import ModalAddMatricula from "../components/matriculas/ModalAddMatricula";
@@ -48,7 +59,8 @@ export default {
     MatriculaCard,
     Loader,
     PageAction,
-    BaseInput
+    BaseInput,
+    BaseSelect
   },
   data() {
     return {
@@ -65,7 +77,8 @@ export default {
   computed: {
     ...mapState({
       "matriculas": 'matriculas',
-      'reload': 'matriculas_reload'
+      'reload': 'matriculas_reload',
+      'status_filtro': 'status_filtro'
     }),
     esconderLoading() {
       return this.loading && this.pagina < 2;
@@ -86,6 +99,14 @@ export default {
         this.SET_MATRICULAS_PAGINA(valor);
       }
     },
+    status: {
+      set(valor) {
+        this.SET_MATRICULAS_STATUS_FILTRO(valor);
+      },
+      get() {
+        return this.$store.state.matriculas_status_filtro;
+      }
+    },
     paginaTotal() {
       return this.matriculas && this.matriculas.last_page || 1;
     }
@@ -93,6 +114,7 @@ export default {
   methods: {
     ...mapMutations([
       'SET_MATRICULAS_PESQUISA',
+      'SET_MATRICULAS_STATUS_FILTRO',
       'SET_MATRICULAS_PAGINA'
     ]),
     ...mapActions([
@@ -125,6 +147,7 @@ export default {
     resetFiltros() {
       this.SET_MATRICULAS_PAGINA(1);
       this.SET_MATRICULAS_PESQUISA('');
+      this.SET_MATRICULAS_STATUS_FILTRO(this.status_filtro[0]);
     },
   },
   watch: {

@@ -5,6 +5,7 @@ export default {
         planos: null,
         planos_pagina: 1,
         planos_pesquisa: '',
+        planos_status_filtro: '',
         planos_reload: null,
         planos_id_edicao: null,
         planos_id_exclusao: null,
@@ -18,6 +19,9 @@ export default {
         },
         SET_PLANOS_PESQUISA(state, pesquisa) {
             state.planos_pesquisa = pesquisa;
+        },
+        SET_PLANOS_STATUS_FILTRO(state, filtro) {
+            state.planos_status_filtro = filtro;
         },
         SET_PLANOS_RELOAD(state, reload) {
             state.planos_reload = reload;
@@ -33,10 +37,12 @@ export default {
         getPlanos(context) {
             let pagina = context.state.planos_pagina;
             let pesquisa = context.state.planos_pesquisa;
+            let status = context.state.planos_status_filtro ? context.state.planos_status_filtro.id : '';
 
             let queryString = new URLSearchParams({
                 page: pagina,
-                pesquisa: pesquisa
+                pesquisa: pesquisa,
+                status: status
             }).toString();
             return api.get(`/planos?${queryString}`).then((r) => {
                 context.commit("SET_PLANOS", r.data);

@@ -48,6 +48,7 @@ export default {
   display: flex;
   align-items: center;
   padding: 0 30px;
+  z-index: 999;
 }
 
 .header-container {

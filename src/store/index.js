@@ -8,6 +8,20 @@ import matriculas from "./matriculas";
 export default createStore({
     state: {
         user: null,
+        status_filtro: [
+            {
+                id: 'todos',
+                name: 'Todos'
+            },
+            {
+                id: 'ativo',
+                name: 'Ativos'
+            },
+            {
+                id: 'inativo',
+                name: 'Inativos'
+            },
+        ],
         ...alunos.state,
         ...planos.state,
         ...matriculas.state,

@@ -9,6 +9,16 @@
           <img src="../assets/add.svg" class="icon" style="height: 20px;width: 20px">
           Cadastrar
         </button>
+        <BaseSelect
+            placeholder="Selecione o filtro"
+            v-model="status"
+            track-by="id"
+            text-by="name"
+            :options="status_filtro"
+            mb="0px"
+            width="237px"
+            @change="pesquisar"
+        />
         <BaseInput
             placeholder="Buscar aluno"
             mb="0px"
@@ -82,6 +92,7 @@
 <script>
 import PageAction from "../components/painel/PageAction";
 import BaseInput from "../components/form/BaseInput";
+import BaseSelect from "../components/form/BaseSelect";
 import {mapActions, mapMutations, mapState} from "vuex";
 import PaginacaoSemRouter from "../components/paginacao/PaginacaoSemRouter";
 import ModalAddAluno from "../components/alunos/ModalAddAluno";
@@ -91,6 +102,7 @@ import ModalExclusaoAluno from "../components/alunos/ModalExclusaoAluno";
 export default {
   name: "Alunos",
   components: {
+    BaseSelect,
     ModalExclusaoAluno,
     ModalEditarAluno,
     ModalAddAluno,
@@ -101,13 +113,14 @@ export default {
   data() {
     return {
       loading: false,
-      abrirCadastrarAluno: false
+      abrirCadastrarAluno: false,
     }
   },
   computed: {
     ...mapState({
       "alunos": 'alunos',
-      'alunos_reload': 'alunos_reload'
+      'alunos_reload': 'alunos_reload',
+      'status_filtro': 'status_filtro'
     }),
     pesquisa: {
       set(valor) {
@@ -124,6 +137,14 @@ export default {
       get() {
         return this.$store.state.alunos_pagina;
       }
+    },
+    status: {
+      set(valor) {
+        this.SET_ALUNOS_STATUS_FILTRO(valor);
+      },
+      get() {
+        return this.$store.state.alunos_status_filtro;
+      }
     }
   },
   watch: {
@@ -135,8 +156,9 @@ export default {
     ...mapMutations([
       "SET_ALUNOS_PAGINA",
       "SET_ALUNOS_PESQUISA",
+      "SET_ALUNOS_STATUS_FILTRO",
       "SET_ALUNOS_ID_EDICAO",
-      "SET_ALUNOS_ID_EXCLUSAO"
+      "SET_ALUNOS_ID_EXCLUSAO",
     ]),
     ...mapActions([
       'getAlunos'
@@ -148,6 +170,7 @@ export default {
       this.SET_ALUNOS_ID_EXCLUSAO(id);
     },
     resetFiltros() {
+      this.SET_ALUNOS_STATUS_FILTRO(this.status_filtro[0]);
       this.SET_ALUNOS_PAGINA(1);
       this.SET_ALUNOS_PESQUISA('');
     },

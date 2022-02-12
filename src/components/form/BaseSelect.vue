@@ -10,9 +10,9 @@
         :allow-empty="empty"
         :label="textBy"
         v-bind="attrs"
-        selectLabel="Enter ou click para selecionar"
-        selectGroupLabel="Enter ou click para selecionar"
-        selectedLabel="Selecionado"
+        selectLabel=""
+        selectGroupLabel=""
+        selectedLabel=""
         deselectLabel=""
         deselectGroupLabel=""
     />
@@ -73,6 +73,7 @@ export default {
   methods: {
     updateValue(event) {
       this.$emit('update:modelValue', event)
+      this.$emit('change', event)
     }
   },
 }

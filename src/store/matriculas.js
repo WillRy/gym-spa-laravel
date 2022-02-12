@@ -5,6 +5,7 @@ export default {
         matriculas: null,
         matriculas_pagina: 1,
         matriculas_pesquisa: '',
+        matriculas_status_filtro: '',
         matriculas_reload: null,
         matriculas_id_edicao: null,
         matriculas_id_exclusao: null,
@@ -28,6 +29,9 @@ export default {
         SET_MATRICULAS_PESQUISA(state, pesquisa) {
             state.matriculas_pesquisa = pesquisa;
         },
+        SET_MATRICULAS_STATUS_FILTRO(state, filtro) {
+            state.matriculas_status_filtro = filtro;
+        },
         SET_MATRICULAS_RELOAD(state, reload) {
             state.matriculas_reload = reload;
         },
@@ -42,10 +46,12 @@ export default {
         getMatriculas(context) {
             let pagina = context.state.matriculas_pagina;
             let pesquisa = context.state.matriculas_pesquisa;
+            let status = context.state.matriculas_status_filtro ? context.state.matriculas_status_filtro.id : '';
 
             let queryString = new URLSearchParams({
                 page: pagina,
-                pesquisa: pesquisa
+                pesquisa: pesquisa,
+                status: status
             }).toString();
             return api.get(`/matriculas?${queryString}`).then((r) => {
                 context.commit("SET_MATRICULAS", r.data);

@@ -9,6 +9,16 @@
           <img src="../assets/add.svg" class="icon" style="height: 20px;width: 20px">
           Cadastrar
         </button>
+        <BaseSelect
+            placeholder="Selecione o filtro"
+            v-model="status"
+            track-by="id"
+            text-by="name"
+            :options="status_filtro"
+            mb="0px"
+            width="237px"
+            @change="pesquisar"
+        />
         <BaseInput
             placeholder="Buscar plano"
             mb="0px"
@@ -82,6 +92,7 @@
 <script>
 import PageAction from "../components/painel/PageAction";
 import BaseInput from "../components/form/BaseInput";
+import BaseSelect from "../components/form/BaseSelect";
 import {mapActions, mapMutations, mapState} from "vuex";
 import PaginacaoSemRouter from "../components/paginacao/PaginacaoSemRouter";
 import ModalAddPlano from "../components/planos/ModalAddPlano";
@@ -95,6 +106,7 @@ export default {
     ModalAddPlano,
     PaginacaoSemRouter,
     BaseInput,
+    BaseSelect,
     PageAction,
     ModalExclusaoPlano
   },
@@ -107,7 +119,8 @@ export default {
   computed: {
     ...mapState({
       "planos": 'planos',
-      'planos_reload': 'planos_reload'
+      'planos_reload': 'planos_reload',
+      'status_filtro': 'status_filtro'
     }),
     pesquisa: {
       set(valor) {
@@ -124,6 +137,14 @@ export default {
       get(){
         return this.$store.state.planos_pagina;
       }
+    },
+    status: {
+      set(valor) {
+        this.SET_PLANOS_STATUS_FILTRO(valor);
+      },
+      get() {
+        return this.$store.state.planos_status_filtro;
+      }
     }
   },
   watch: {
@@ -135,6 +156,7 @@ export default {
     ...mapMutations([
       "SET_PLANOS_PAGINA",
       "SET_PLANOS_PESQUISA",
+      "SET_PLANOS_STATUS_FILTRO",
       "SET_PLANOS_ID_EDICAO",
       "SET_PLANOS_ID_EXCLUSAO"
     ]),
@@ -148,6 +170,7 @@ export default {
       this.SET_PLANOS_ID_EXCLUSAO(id);
     },
     resetFiltros(){
+      this.SET_PLANOS_STATUS_FILTRO(this.status_filtro[0]);
       this.SET_PLANOS_PAGINA(1);
       this.SET_PLANOS_PESQUISA('');
     },

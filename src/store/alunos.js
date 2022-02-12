@@ -5,6 +5,7 @@ export default {
         alunos: null,
         alunos_pagina: 1,
         alunos_pesquisa: '',
+        alunos_status_filtro: null,
         alunos_reload: null,
         alunos_id_edicao: null,
         alunos_id_exclusao: null,
@@ -18,6 +19,9 @@ export default {
         },
         SET_ALUNOS_PESQUISA(state, pesquisa) {
             state.alunos_pesquisa = pesquisa;
+        },
+        SET_ALUNOS_STATUS_FILTRO(state, filtro) {
+            state.alunos_status_filtro = filtro;
         },
         SET_ALUNOS_RELOAD(state, reload) {
             state.alunos_reload = reload;
@@ -33,10 +37,12 @@ export default {
         getAlunos(context) {
             let pagina = context.state.alunos_pagina;
             let pesquisa = context.state.alunos_pesquisa;
+            let status = context.state.alunos_status_filtro ? context.state.alunos_status_filtro.id : '';
 
             let queryString = new URLSearchParams({
                 page: pagina,
-                pesquisa: pesquisa
+                pesquisa: pesquisa,
+                status: status
             }).toString();
             return api.get(`/alunos?${queryString}`).then((r) => {
                 context.commit("SET_ALUNOS", r.data);
