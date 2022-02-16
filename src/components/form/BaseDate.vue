@@ -46,19 +46,22 @@ export default {
       default: false
     }
   },
-  data() {
-    return {
-      data: typeof this.modelValue === "string" ? new Date(`${this.modelValue}T00:00:00`) : this.modelValue
-    }
-  },
   computed: {
     attrs() {
       return {
         ...this.$attrs,
       }
     },
-    dataNormalizada() {
-      return typeof this.modelValue === "string" ? new Date(`${this.modelValue}T00:00:00`) : this.modelValue;
+    data: {
+      set(valor) {
+        if(valor) {
+          let data = typeof valor === "string" ? new Date(`${valor}T00:00:00`) : valor;
+          this.$emit('update:modelValue', data);
+        }
+      },
+      get() {
+        return this.modelValue;
+      }
     },
     formatado() {
       if (this.modelValue) {
@@ -69,17 +72,12 @@ export default {
     }
   },
   methods: {
-    normalizarData() {
-      this.$emit('update:modelValue', this.dataNormalizada);
+    emitirData() {
+      this.$emit('update:modelValue', this.data);
     },
   },
   created() {
-    this.normalizarData();
-  },
-  watch: {
-    dataNormalizada() {
-      this.normalizarData();
-    }
+    this.emitirData();
   }
 }
 </script>
