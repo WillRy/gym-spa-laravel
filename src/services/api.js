@@ -17,7 +17,6 @@ api.interceptors.response.use(function (response) {
     return response;
 }, async function (error) {
     if (401 === error.response.status) {
-        await store.dispatch("logout");
         window.localStorage.removeItem("token");
         window.location = '/';
     }
